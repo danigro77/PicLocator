@@ -1,8 +1,7 @@
 class Locations
 
-  def initialize(lat, lon)
-    @lat = lat
-    @lon = lon
+  def initialize(latitude, longitude)
+    @latitude, @longitude = latitude, longitude
   end
 
 end
