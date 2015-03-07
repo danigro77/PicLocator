@@ -9,7 +9,7 @@ class ImageService
   private
 
   def get_token
-    # @access_token = 
+    # @access_token =
   end
 
 end
