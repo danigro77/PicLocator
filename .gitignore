@@ -18,3 +18,6 @@
 
 # Ignore RubyMine
 .idea/
+
+# Instagram config
+/config/initializers/instagram.rb
