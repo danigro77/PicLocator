@@ -50,3 +50,6 @@ end
 
 # Instagram
 gem 'instagram', '~> 1.1.3'
+
+# Heroku
+gem 'rails_12factor', group: :production
