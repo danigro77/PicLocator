@@ -11,16 +11,17 @@ $(function() {
     });
 
     var get_data = function(latitude, longitude, radius) {
+        var url = "/images/" + latitude + "/" + longitude + "/" + radius;
+        var clean_url = url.replace(/\./g, "%2E");
         $.ajax({
             type: "GET",
             contentType: "application/json; charset=utf-8",
-            url: "/images/" + latitude + "/" + longitude + "/" + radius,
+            url: clean_url,
             dataType: "json",
             success: function (result) {
                 window.alert("success!!");
             },
             error: function (error){
-                console.log(error);
                 window.alert("something wrong!");
             }
         });
