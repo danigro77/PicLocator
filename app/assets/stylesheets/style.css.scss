@@ -1,3 +1,22 @@
 body {
-  background: green;
+  background: dimgray;
+  font-family: "Helvetica Neue", Arial, "Lucida Grande", sans-serif;
+}
+.wrapper {
+  width: 960px;
+  margin: 0 auto;
+}
+
+h1, .input_fields {
+  margin-left: 10px;
+}
+
+.images {
+  margin-top: 30px;
+  img {
+    width: 200px;
+    float: left;
+    padding: 10px;
+    border: darkgray solid 3px;
+  }
 }
