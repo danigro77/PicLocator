@@ -46,5 +46,17 @@ describe Picture do
       end
     end
   end
+
+  describe '.find_distance' do
+    before do
+      @loc1 = [42.990967, -71.463767]
+      @loc2 = [42.990967, -71.44365]
+      @expected_distance_in_meter = 1636
+    end
+
+    it 'should find the distance between two locations' do
+      expect(Picture.find_distance(@loc1, @loc2).to_i).to eq @expected_distance_in_meter
+    end
+  end
 end
 
