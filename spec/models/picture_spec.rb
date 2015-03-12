@@ -1,0 +1,50 @@
+require 'spec_helper'
+require 'rails_helper'
+
+describe Picture do
+
+  describe '#initialize' do
+    before do
+      @url = 'www.bla.com'
+      @dis = 3
+      @pic = Picture.new(@url, @dis)
+    end
+    it 'initializes a new picture object' do
+      expect(@pic.url).to eq @url
+      expect(@pic.distance).to eq @dis
+    end
+  end
+
+  describe '.get_picture' do
+    before do
+      @params = {latitude: 37.775000, longitude: -122.4183333, radius: 100}
+      @image_in_radius = {  'location' => {'latitude' => 37.774275261, 'longitude' => -122.426816284},
+                            'images' => {'standard_resolution' => {'url' => 'bla1.com'}}
+      }
+      @image_at_origin = {'location' => {'latitude' => @params[:latitude], 'longitude' => @params[:longitude]},
+                          'images' => {'standard_resolution' => {'url' => 'bla2.com'}}
+      }
+      @image_outside_radius = {'location' => {'latitude' => 0, 'longitude' => 0},
+                               'images' => {'standard_resolution' => {'url' => 'bla3.com'}}
+      }
+    end
+
+    context 'when inside the expected radius' do
+      it 'should create a picture object' do
+        pic1 = Picture.get_picture(@image_at_origin, @params[:latitude], @params[:longitude], @params[:radius])
+        expect(pic1).to be_a Picture
+        pic2 = Picture.get_picture(@image_in_radius, @params[:latitude], @params[:longitude], @params[:radius])
+        expect(pic2).to be_a Picture
+      end
+    end
+
+    context 'when outside the expected radius' do
+      it 'should not create a picture object' do
+        pic = Picture.get_picture(@image_outside_radius, @params[:latitude], @params[:longitude], @params[:radius])
+        expect(pic).to_not be_a Picture
+        expect(pic).to be_nil
+      end
+    end
+  end
+end
+
