@@ -5,7 +5,12 @@ class ImagesController < ApplicationController
   def index
     client = Instagram.client(:access_token => session[:access_token])
     @pictures = []
-    @images = client.media_search(params[:latitude],params[:longitude])
+    @images = if session[:next_max_id]
+                client.media_search(params[:latitude],params[:longitude], :max_id => session[:next_max_id])
+              else
+                client.media_search(params[:latitude],params[:longitude])
+              end
+    session[:next_max_id] = @images.pagination#.try(:next_max_id)
     @images.each do |image|
       @pictures << Picture.get_picture(
           image,
